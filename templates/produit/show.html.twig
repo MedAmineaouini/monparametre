@@ -3,12 +3,24 @@
 {% block title %}Produit{% endblock %}
 
 {% block body %}
-    <h1>Produit</h1>
-
+<div class="card card-h-10 mt-1">
+    <div class="card-body table-responsive">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h3>Produit</h3>
+            <div class="dropdown">
+                <a href="{{ path('app_produit_index') }}" class="btn btn-secondary">Back to list</a>
+                <a href="{{ path('app_produit_edit', {'SEQPROD': produit.SEQPROD}) }}" class="btn btn-primary">Edit</a>
+                {{ include('produit/_delete_form.html.twig') }}
+            </div>
+        </div>
     <form>
         <div class="mb-3">
             <label for="seqprod" class="form-label">SEQPROD</label>
             <input type="text" class="form-control" id="seqprod" value="{{ produit.SEQPROD }}" readonly>
+        </div>
+        <div class="mb-3">
+            <label for="libprod" class="form-label">CODEPROD</label>
+            <input type="text" class="form-control" id="libprod" value="{{ produit.CODEPROD }}" readonly>
         </div>
         <div class="mb-3">
             <label for="libprod" class="form-label">LIBPROD</label>
@@ -30,9 +42,8 @@
             <label for="email" class="form-label">Pays</label>
             <input type="email" class="form-control" id="email" value="{{ produit.IDPAYS.libpays  }}" readonly>
         </div>
-        <a href="{{ path('app_produit_index') }}" class="btn btn-secondary">Back to list</a>
-        <a href="{{ path('app_produit_edit', {'SEQPROD': produit.SEQPROD}) }}" class="btn btn-primary">Edit</a>
 
-        {{ include('produit/_delete_form.html.twig') }}
     </form>
+    </div>
+</div>
 {% endblock %}

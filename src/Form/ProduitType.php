@@ -14,13 +14,25 @@ class ProduitType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('LIBPROD')
-            ->add('ADRESSE')
-            ->add('TEL')
-            ->add('EMAIL')
+            ->add('CODEPROD', null, [
+                'label' => 'Code produit',  // Changer le label ici
+            ])
+            ->add('LIBPROD', null, [
+                'label' => 'Libillé',  // Changer le label ici
+            ])
+            ->add('ADRESSE', null, [
+                'label' => 'Adresse',  // Changer le label ici
+            ])
+            ->add('TEL', null, [
+                'label' => 'Telephone',  // Changer le label ici
+            ])
+            ->add('EMAIL', null, [
+                'label' => 'Email',  // Changer le label ici
+            ])
             ->add('IDPAYS', EntityType::class, [
                 'class' => Pays::class,
                 'choice_label' => 'LIBPAYS',
+                'label' => 'Pays'
             ])
         ;
     }

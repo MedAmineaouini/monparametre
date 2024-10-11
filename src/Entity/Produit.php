@@ -28,6 +28,9 @@ class Produit
     #[ORM\JoinColumn(name: 'IDPAYS', referencedColumnName: 'IDPAYS', nullable: false)]
     private ?Pays $IDPAYS = null;
 
+    #[ORM\Column(length: 5)]
+    private ?string $CODEPROD = null;
+
 
     public function getSEQPROD(): ?int
     {
@@ -97,6 +100,18 @@ class Produit
     public function setIDPAYS(?Pays $IDPAYS): static
     {
         $this->IDPAYS = $IDPAYS;
+
+        return $this;
+    }
+
+    public function getCODEPROD(): ?string
+    {
+        return $this->CODEPROD;
+    }
+
+    public function setCODEPROD(string $CODEPROD): static
+    {
+        $this->CODEPROD = $CODEPROD;
 
         return $this;
     }

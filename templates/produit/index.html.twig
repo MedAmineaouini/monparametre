@@ -3,6 +3,24 @@
 {% block title %}Produit index{% endblock %}
 
 {% block body %}
+    <style>
+        .form-container {
+            border: 1px solid #009cc2; /* Couleur de la bordure */
+            border-radius: 10px; /* Coins arrondis */
+            padding: 20px; /* Espacement intérieur */
+            background-color: #f8f9fa; /* Couleur de fond légèrement gris */
+            margin-bottom: 20px; /* Espacement en bas */
+        }
+
+        .form-row {
+            display: flex; /* Flexbox pour l'alignement */
+            justify-content: center; /* Centre le contenu horizontalement */
+        }
+
+        .form-control {
+            width: 200px; /* Largeur fixe pour les champs */
+        }
+    </style>
     <div class="card card-h-10 mt-1">
         <div class="card-body table-responsive">
             <div class="d-flex justify-content-between align-items-center mb-3">
@@ -40,6 +58,7 @@
                 <thead>
                 <tr>
                     <th>SEQPROD</th>
+                    <th>CODEPROD</th>
                     <th>LIBPROD</th>
                     <th>ADRESSE</th>
                     <th>TEL</th>
@@ -52,6 +71,7 @@
                 {% for produit in produits %}
                     <tr>
                         <td>{{ produit.SEQPROD }}</td>
+                        <td>{{ produit.CODEPROD }}</td>
                         <td>{{ produit.LIBPROD }}</td>
                         <td>{{ produit.ADRESSE }}</td>
                         <td>{{ produit.TEL }}</td>
