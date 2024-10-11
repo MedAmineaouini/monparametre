@@ -24,6 +24,9 @@ class Produit
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $EMAIL = null;
+    #[ORM\ManyToOne(inversedBy: 'produit', targetEntity: Pays::class)]
+    #[ORM\JoinColumn(name: 'IDPAYS', referencedColumnName: 'IDPAYS', nullable: false)]
+    private ?Pays $IDPAYS = null;
 
 
     public function getSEQPROD(): ?int
@@ -82,6 +85,18 @@ class Produit
     public function setEMAIL(?string $EMAIL): static
     {
         $this->EMAIL = $EMAIL;
+
+        return $this;
+    }
+
+    public function getIDPAYS(): ?Pays
+    {
+        return $this->IDPAYS;
+    }
+
+    public function setIDPAYS(?Pays $IDPAYS): static
+    {
+        $this->IDPAYS = $IDPAYS;
 
         return $this;
     }

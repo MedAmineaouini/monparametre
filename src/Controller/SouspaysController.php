@@ -20,8 +20,8 @@ final class SouspaysController extends AbstractController
             'SELECT s, p
         FROM App\Entity\Souspays s
         JOIN s.IDPAYS p'
-        )
-            ->setMaxResults(200); // Limite à 200 résultats
+        );
+//            ->setMaxResults(200); // Limite à 200 résultats
 
         $souspays = $query->getResult();
 

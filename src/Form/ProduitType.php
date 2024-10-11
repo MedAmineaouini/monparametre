@@ -2,7 +2,9 @@
 
 namespace App\Form;
 
+use App\Entity\Pays;
 use App\Entity\Produit;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -16,6 +18,10 @@ class ProduitType extends AbstractType
             ->add('ADRESSE')
             ->add('TEL')
             ->add('EMAIL')
+            ->add('IDPAYS', EntityType::class, [
+                'class' => Pays::class,
+                'choice_label' => 'LIBPAYS',
+            ])
         ;
     }
 
