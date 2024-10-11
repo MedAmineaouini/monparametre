@@ -1,19 +1,30 @@
 doctrine:
     dbal:
-        url: '%env(resolve:DATABASE_URL)%'
+        # Configuration de la connexion à la base de données
+        default_connection: default
+        connections:
+            default:
+                # Configuration spécifique à SQL Server
+                driver: 'pdo_sqlsrv'
+                # Hôte du serveur SQL Server
+                host: '5.196.92.101'
+                # Port (par défaut : 1433)
+                port: '1433'
+                # Nom de la base de données
+                dbname: 'RFT_V2'
+                # Nom d'utilisateur
+                user: 'sa'
+                # Mot de passe
+                password: '@Serv+sol24+#05'
+                # Options supplémentaires
+                charset: 'latin1' # Essayez avec 'latin1'
 
-        # IMPORTANT: You MUST configure your server version,
-        # either here or in the DATABASE_URL env var (see .env file)
-        #server_version: '16'
-
-        profiling_collect_backtrace: '%kernel.debug%'
-        use_savepoints: true
     orm:
         auto_generate_proxy_classes: true
         enable_lazy_ghost_objects: true
         report_fields_where_declared: true
         validate_xml_mapping: true
-        naming_strategy: doctrine.orm.naming_strategy.underscore_number_aware
+        naming_strategy:  doctrine.orm.naming_strategy.underscore
         auto_mapping: true
         mappings:
             App:
@@ -22,8 +33,6 @@ doctrine:
                 dir: '%kernel.project_dir%/src/Entity'
                 prefix: 'App\Entity'
                 alias: App
-        controller_resolver:
-            auto_mapping: false
 
 when@test:
     doctrine:

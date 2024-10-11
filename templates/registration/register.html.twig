@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Register{% endblock %}
+
+{% block body %}
+    <h1 class="mb-4">Ajouter Utilisateur</h1>
+
+    {# Affichage des erreurs globales du formulaire #}
+    {% if form_errors(registrationForm) %}
+        <div class="alert alert-danger">
+            {{ form_errors(registrationForm) }}
+        </div>
+    {% endif %}
+
+    {{ form_start(registrationForm, {'attr': {'class': 'form-horizontal'}}) }}
+    <div class="card card-h-100">
+    <div class="card-body">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h3>Listes utilisateurs</h3>
+            <div class="dropdown">
+                <a class="btn btn-primary" href="{{ path('app_register') }}">Ajouter utilisateur</a>
+                {#                <a href="#" class="dropdown-toggle arrow-none card-drop" data-bs-toggle="dropdown" aria-expanded="false"> #}
+                {#                    <i class="mdi mdi-dots-vertical"></i> #}
+                {#                </a> #}
+                {#                <div class="dropdown-menu dropdown-menu-end"> #}
+                {#                    <!-- item--> #}
+                {#                    <a href="javascript:void(0);" class="dropdown-item">Refresh Report</a> #}
+                {#                    <!-- item--> #}
+                {#                    <a href="javascript:void(0);" class="dropdown-item">Export Report</a> #}
+                {#                </div> #}
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-4 mb-3">
+                {{ form_label(registrationForm.login, null, {'label_attr': {'class': 'form-label'}}) }}
+                {{ form_widget(registrationForm.login, {'attr': {'class': 'form-control'}}) }}
+                {{ form_errors(registrationForm.login, {'attr': {'class': 'text-danger'}}) }}
+            </div>
+
+            <div class="form-group col-md-4 mb-3">
+                {{ form_label(registrationForm.plainPassword, 'Password', {'label_attr': {'class': 'form-label'}}) }}
+                {{ form_widget(registrationForm.plainPassword, {'attr': {'class': 'form-control'}}) }}
+                {{ form_errors(registrationForm.plainPassword, {'attr': {'class': 'text-danger'}}) }}
+            </div>
+
+            <div class="form-group col-md-4 form-check mt-4">
+                {{ form_widget(registrationForm.agreeTerms, {'attr': {'class': 'form-check-input'}}) }}
+                {{ form_label(registrationForm.agreeTerms, null, {'label_attr': {'class': 'form-check-label'}}) }}
+                {{ form_errors(registrationForm.agreeTerms, {'attr': {'class': 'text-danger'}}) }}
+            </div>
+
+            <button type="submit" class="btn btn-primary">Register</button>
+        </div>
+    </div>
+    {{ form_end(registrationForm) }}
+{% endblock %}
