@@ -16,9 +16,14 @@ final class SouspaysController extends AbstractController
     #[Route(name: 'app_souspays_index', methods: ['GET'])]
     public function index(EntityManagerInterface $entityManager): Response
     {
-        $souspays = $entityManager
-            ->getRepository(Souspays::class)
-            ->findAll();
+        $query = $entityManager->createQuery(
+            'SELECT s, p
+        FROM App\Entity\Souspays s
+        JOIN s.IDPAYS p'
+        )
+            ->setMaxResults(200); // Limite à 200 résultats
+
+        $souspays = $query->getResult();
 
         return $this->render('souspays/index.html.twig', [
             'souspays' => $souspays,

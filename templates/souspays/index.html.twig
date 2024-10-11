@@ -8,9 +8,9 @@
     <table class="table">
         <thead>
             <tr>
-                <th>SEQSOUSPAYS</th>
+                <th>SEQ</th>
+                <th>Sous pays </th>
                 <th>Pays</th>
-                <th>LIBSOUSPAYS</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -18,8 +18,8 @@
         {% for souspay in souspays %}
             <tr>
                 <td>{{ souspay.SEQSOUSPAYS }}</td>
-                <td>{{ souspay.LIBPAYS }}</td>
                 <td>{{ souspay.LIBSOUSPAYS }}</td>
+                <td>{{ souspay.IDPAYS.LIBPAYS }}</td>
                 <td>
                     <a href="{{ path('app_souspays_show', {'SEQSOUSPAYS': souspay.SEQSOUSPAYS}) }}">show</a>
                     <a href="{{ path('app_souspays_edit', {'SEQSOUSPAYS': souspay.SEQSOUSPAYS}) }}">edit</a>
