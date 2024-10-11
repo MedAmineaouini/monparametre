@@ -25,13 +25,6 @@ class Produit
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $EMAIL = null;
 
-    #[ORM\ManyToOne(targetEntity: Souspays::class)]
-    #[ORM\JoinColumn(name: 'SEQSOUSPAYS', referencedColumnName: 'SEQSOUSPAYS', nullable: true)]
-    private ?Souspays $SEQSOUSPAYS = null;
-
-    #[ORM\ManyToOne(targetEntity: Pays::class)]
-    #[ORM\JoinColumn(name: 'IDPAYS', referencedColumnName: 'IDPAYS', nullable: true)]
-    private ?Pays $IDPAYS = null;
 
     public function getSEQPROD(): ?int
     {
@@ -93,27 +86,4 @@ class Produit
         return $this;
     }
 
-    public function getSEQSOUSPAYS(): ?Souspays
-    {
-        return $this->SEQSOUSPAYS;
-    }
-
-    public function setSEQSOUSPAYS(?Souspays $SEQSOUSPAYS): static
-    {
-        $this->SEQSOUSPAYS = $SEQSOUSPAYS;
-
-        return $this;
-    }
-
-    public function getIDPAYS(): ?Pays
-    {
-        return $this->IDPAYS;
-    }
-
-    public function setIDPAYS(?Pays $IDPAYS): static
-    {
-        $this->IDPAYS = $IDPAYS;
-
-        return $this;
-    }
 }
