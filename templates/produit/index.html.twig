@@ -3,8 +3,7 @@
 {% block title %}Produit index{% endblock %}
 
 {% block body %}
-    <br>
-    <div class="card card-h-100">
+    <div class="card card-h-10 mt-1">
         <div class="card-body table-responsive">
             <div class="d-flex justify-content-between align-items-center mb-3">
                 <h3>Liste produits</h3>
@@ -13,25 +12,19 @@
                 </div>
             </div>
 
-
-
-
             <form method="get" action="{{ path('app_produit_index') }}" class="form-container mb-3">
                 <div class="form-row">
                     <div class="col">
-                        <input type="text" name="codeprod" value="{{ app.request.query.get('codeprod') }}"
-                               class="form-control" placeholder="Code Produit">
+                        <input type="text" name="codeprod" value="{{ app.request.query.get('codeprod') }}" class="form-control" placeholder="Code Produit">
                     </div>
                     <div class="col">
-                        <input type="text" name="libprod" value="{{ app.request.query.get('libprod') }}"
-                               class="form-control" placeholder="Libellé Produit">
+                        <input type="text" name="libprod" value="{{ app.request.query.get('libprod') }}" class="form-control" placeholder="Libellé Produit">
                     </div>
                     <div class="col">
                         <select name="pays" class="form-control">
                             <option value="">-- Sélectionner un pays --</option>
                             {% for pays in paysList %}
-                                <option value="{{ pays.IDPAYS }}"
-                                        {% if app.request.query.get('pays') == pays.IDPAYS %}selected{% endif %}>
+                                <option value="{{ pays.IDPAYS }}" {% if app.request.query.get('pays') == pays.IDPAYS %}selected{% endif %}>
                                     {{ pays.LIBPAYS }}
                                 </option>
                             {% endfor %}
@@ -52,7 +45,7 @@
                     <th>TEL</th>
                     <th>EMAIL</th>
                     <th>Pays</th>
-                    <th>actions</th>
+                    <th>Actions</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -71,12 +64,11 @@
                     </tr>
                 {% else %}
                     <tr>
-                        <td colspan="6">no records found</td>
+                        <td colspan="7">No records found</td>
                     </tr>
                 {% endfor %}
                 </tbody>
             </table>
         </div>
     </div>
-    <a href="{{ path('app_produit_new') }}">Create new</a>
 {% endblock %}
