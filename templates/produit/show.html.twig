@@ -5,34 +5,34 @@
 {% block body %}
     <h1>Produit</h1>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>SEQPROD</th>
-                <td>{{ produit.SEQPROD }}</td>
-            </tr>
-            <tr>
-                <th>LIBPROD</th>
-                <td>{{ produit.LIBPROD }}</td>
-            </tr>
-            <tr>
-                <th>ADRESSE</th>
-                <td>{{ produit.ADRESSE }}</td>
-            </tr>
-            <tr>
-                <th>TEL</th>
-                <td>{{ produit.TEL }}</td>
-            </tr>
-            <tr>
-                <th>EMAIL</th>
-                <td>{{ produit.EMAIL }}</td>
-            </tr>
-        </tbody>
-    </table>
+    <form>
+        <div class="mb-3">
+            <label for="seqprod" class="form-label">SEQPROD</label>
+            <input type="text" class="form-control" id="seqprod" value="{{ produit.SEQPROD }}" readonly>
+        </div>
+        <div class="mb-3">
+            <label for="libprod" class="form-label">LIBPROD</label>
+            <input type="text" class="form-control" id="libprod" value="{{ produit.LIBPROD }}" readonly>
+        </div>
+        <div class="mb-3">
+            <label for="adresse" class="form-label">ADRESSE</label>
+            <input type="text" class="form-control" id="adresse" value="{{ produit.ADRESSE }}" readonly>
+        </div>
+        <div class="mb-3">
+            <label for="tel" class="form-label">TEL</label>
+            <input type="text" class="form-control" id="tel" value="{{ produit.TEL }}" readonly>
+        </div>
+        <div class="mb-3">
+            <label for="email" class="form-label">EMAIL</label>
+            <input type="email" class="form-control" id="email" value="{{ produit.EMAIL }}" readonly>
+        </div>
+        <div class="mb-3">
+            <label for="email" class="form-label">Pays</label>
+            <input type="email" class="form-control" id="email" value="{{ produit.IDPAYS.libpays  }}" readonly>
+        </div>
+        <a href="{{ path('app_produit_index') }}" class="btn btn-secondary">Back to list</a>
+        <a href="{{ path('app_produit_edit', {'SEQPROD': produit.SEQPROD}) }}" class="btn btn-primary">Edit</a>
 
-    <a href="{{ path('app_produit_index') }}">back to list</a>
-
-    <a href="{{ path('app_produit_edit', {'SEQPROD': produit.SEQPROD}) }}">edit</a>
-
-    {{ include('produit/_delete_form.html.twig') }}
+        {{ include('produit/_delete_form.html.twig') }}
+    </form>
 {% endblock %}

@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Produit;
+use App\Entity\Pays;
 use App\Form\ProduitType;
 use App\Repository\ProduitRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -11,14 +12,58 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
+
 #[Route('/produit')]
 final class ProduitController extends AbstractController
 {
+//    #[Route(name: 'app_produit_index', methods: ['GET'])]
+//    public function index(Request $request, ProduitRepository $produitRepository, EntityManagerInterface $entityManager): Response
+//
+//    {
+//        $paysList = $entityManager->getRepository(Pays::class)->findAll();
+//        return $this->render('produit/index.html.twig', [
+//            'produits' => $produitRepository->findAll(),
+//            'paysList' => $paysList,
+//
+//        ]);
+//    }
     #[Route(name: 'app_produit_index', methods: ['GET'])]
-    public function index(ProduitRepository $produitRepository): Response
+    public function index2(Request $request, ProduitRepository $produitRepository, EntityManagerInterface $entityManager): Response
     {
+        $paysList = $entityManager->getRepository(Pays::class)->findAll();
+        $codeProd = $request->query->get('codeprod');
+        $libProd = $request->query->get('libprod');
+        $pays = $request->query->get('pays');
+
+        $queryBuilder = $produitRepository->createQueryBuilder('p')
+            ->leftJoin('p.IDPAYS', 'pays')
+            ->addSelect('pays');
+//        if ($codeProd) {
+//            $queryBuilder->andWhere('p.SEQPROD LIKE :codeprod')
+//                ->setParameter('codeprod', '%'.$codeProd.'%');
+//        }
+
+        if ($libProd) {
+            $queryBuilder->andWhere('p.LIBPROD LIKE :libprod')
+                ->setParameter('libprod', '%'.$libProd.'%');
+        }
+
+        if ($pays) {
+            $queryBuilder->andWhere('pays.LIBPAYS LIKE :pays')
+                ->setParameter('pays', '%'.$pays.'%');
+        }
+        $query = $queryBuilder->getQuery();
+        $sql = $query->getSQL(); // Obtenir la requête SQL
+
+        // Afficher la requête dans un dump
+
+        // Récupérer les résultats de la requête
+//        $produits = $query->getResult();
+
+        //$produits = $queryBuilder->getQuery()->getResult();
         return $this->render('produit/index.html.twig', [
-            'produits' => $produitRepository->findAll(),
+            'query' => $sql,
+            'paysList' => $paysList,
         ]);
     }
 
