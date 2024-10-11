@@ -3,7 +3,6 @@
 {% block title %}Produit index{% endblock %}
 
 {% block body %}
-{{ dump (query)  }}
     <br>
     <div class="card card-h-100">
         <div class="card-body table-responsive">
@@ -13,8 +12,12 @@
                     <a class="btn btn-primary" href="{{ path('app_produit_new') }}">Ajouter produit</a>
                 </div>
             </div>
-            <form method="get" action="{{ path('app_produit_index') }}" class="mb-3">
-                <div class="row">
+
+
+
+
+            <form method="get" action="{{ path('app_produit_index') }}" class="form-container mb-3">
+                <div class="form-row">
                     <div class="col">
                         <input type="text" name="codeprod" value="{{ app.request.query.get('codeprod') }}"
                                class="form-control" placeholder="Code Produit">
@@ -32,12 +35,14 @@
                                     {{ pays.LIBPAYS }}
                                 </option>
                             {% endfor %}
-                        </select></div>
+                        </select>
+                    </div>
                     <div class="col">
-                        <button type="submit" class="btn btn-primary">Filtrer</button>
+                        <button type="submit" class="btn btn-success">Filtrer</button>
                     </div>
                 </div>
             </form>
+
             <table id="basic-datatable" class="table">
                 <thead>
                 <tr>
@@ -51,24 +56,24 @@
                 </tr>
                 </thead>
                 <tbody>
-{#                {% for produit in produits %}#}
-{#                    <tr>#}
-{#                        <td>{{ produit.SEQPROD }}</td>#}
-{#                        <td>{{ produit.LIBPROD }}</td>#}
-{#                        <td>{{ produit.ADRESSE }}</td>#}
-{#                        <td>{{ produit.TEL }}</td>#}
-{#                        <td>{{ produit.EMAIL }}</td>#}
-{#                        <td>{{ produit.IDPAYS.LIBPAYS }}</td>#}
-{#                        <td>#}
-{#                            <a href="{{ path('app_produit_show', {'SEQPROD': produit.SEQPROD}) }}">show</a>#}
-{#                            <a href="{{ path('app_produit_edit', {'SEQPROD': produit.SEQPROD}) }}">edit</a>#}
-{#                        </td>#}
-{#                    </tr>#}
-{#                {% else %}#}
+                {% for produit in produits %}
+                    <tr>
+                        <td>{{ produit.SEQPROD }}</td>
+                        <td>{{ produit.LIBPROD }}</td>
+                        <td>{{ produit.ADRESSE }}</td>
+                        <td>{{ produit.TEL }}</td>
+                        <td>{{ produit.EMAIL }}</td>
+                        <td>{{ produit.IDPAYS.LIBPAYS }}</td>
+                        <td>
+                            <a href="{{ path('app_produit_show', {'SEQPROD': produit.SEQPROD}) }}">show</a>
+                            <a href="{{ path('app_produit_edit', {'SEQPROD': produit.SEQPROD}) }}">edit</a>
+                        </td>
+                    </tr>
+                {% else %}
                     <tr>
                         <td colspan="6">no records found</td>
                     </tr>
-{#                {% endfor %}#}
+                {% endfor %}
                 </tbody>
             </table>
         </div>

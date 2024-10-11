@@ -38,34 +38,47 @@ final class ProduitController extends AbstractController
         $queryBuilder = $produitRepository->createQueryBuilder('p')
             ->leftJoin('p.IDPAYS', 'pays')
             ->addSelect('pays');
-//        if ($codeProd) {
-//            $queryBuilder->andWhere('p.SEQPROD LIKE :codeprod')
-//                ->setParameter('codeprod', '%'.$codeProd.'%');
-//        }
+
+        if ($codeProd) {
+            $queryBuilder->andWhere('p.SEQPROD LIKE :codeprod')
+                ->setParameter('codeprod', '%' . $codeProd . '%');
+        }
 
         if ($libProd) {
             $queryBuilder->andWhere('p.LIBPROD LIKE :libprod')
-                ->setParameter('libprod', '%'.$libProd.'%');
+                ->setParameter('libprod', '%' . $libProd . '%');
         }
 
         if ($pays) {
-            $queryBuilder->andWhere('pays.LIBPAYS LIKE :pays')
-                ->setParameter('pays', '%'.$pays.'%');
+            $queryBuilder->andWhere('pays.IDPAYS = :pays')
+                ->setParameter('pays', $pays);
         }
+
         $query = $queryBuilder->getQuery();
+
+        // Debug: afficher la requête SQL
         $sql = $query->getSQL(); // Obtenir la requête SQL
+//        var_dump($sql); // Afficher la requête SQL pour le débogage
 
-        // Afficher la requête dans un dump
+        try {
+            $produits = $query->getArrayResult();
+            if (empty($produits)) {
+                // Gérer le cas où aucun produit n'est trouvé
+                $produits = []; // ou un message pour informer qu'aucun produit n'a été trouvé
+            }
+        } catch (\Exception $e) {
+            // Gérer l'erreur (journalisation, message d'erreur, etc.)
+            var_dump($e->getMessage());
+            die();
+        }
 
-        // Récupérer les résultats de la requête
-//        $produits = $query->getResult();
-
-        //$produits = $queryBuilder->getQuery()->getResult();
         return $this->render('produit/index.html.twig', [
-            'query' => $sql,
+            'produits' => $produits,
             'paysList' => $paysList,
         ]);
     }
+
+
 
     #[Route('/new', name: 'app_produit_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
