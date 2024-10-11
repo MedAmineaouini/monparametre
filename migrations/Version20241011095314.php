@@ -20,8 +20,6 @@ final class Version20241011095314 extends AbstractMigration
     public function up(Schema $schema): void
     {
         // this up() migration is auto-generated, please modify it to your needs
-        $this->addSql('ALTER TABLE [USER] ALTER COLUMN login NVARCHAR(180) NOT NULL');
-        $this->addSql('ALTER TABLE [USER] ALTER COLUMN password NVARCHAR(50) NOT NULL');
         $this->addSql('ALTER TABLE PRODUIT DROP CONSTRAINT FK_29A5EC2717A80A88');
         $this->addSql('ALTER TABLE PRODUIT DROP CONSTRAINT FK_29A5EC27FE3540F4');
         $this->addSql('DROP INDEX IDX_29A5EC27FE3540F4 ON PRODUIT');
