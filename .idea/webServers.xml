@@ -3,7 +3,7 @@
   <component name="WebServers">
     <option name="servers">
       <webServer id="256f0c27-36a4-4464-a2d8-ab51d070828d" name="Solplus">
-        <fileTransfer rootFolder="/var/www/html" accessType="SFTP" host="91.121.8.210" port="22" sshConfigId="31394e5d-3d04-42fc-b3dd-59d6e7f4fd85" sshConfig="root@91.121.8.210:22 password">
+        <fileTransfer rootFolder="/var/www/html" accessType="SFTP" host="91.121.8.210" port="22" sshConfigId="31394e5d-3d04-42fc-b3dd-59d6e7f4fd85" sshConfig="sa@91.121.8.210:22 password">
           <advancedOptions>
             <advancedOptions dataProtectionLevel="Private" keepAliveTimeout="0" passiveMode="true" shareSSLContext="true" />
           </advancedOptions>
