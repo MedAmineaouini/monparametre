@@ -23,4 +23,4 @@
 #/public/assets/
 /assets/vendor/
 ###< symfony/asset-mapper ###
-/config/packages/doctrine.yaml
+config/packages/doctrine.yaml
