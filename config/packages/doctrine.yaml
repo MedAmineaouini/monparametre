@@ -5,7 +5,7 @@ doctrine:
         connections:
             default:
                 # Configuration spécifique à SQL Server
-                driver: 'pdo_sqlsrv'
+                driver: 'pdo_sqlsr'
                 # Hôte du serveur SQL Server
                 host: '5.196.92.101'
                 # Port (par défaut : 1433)
