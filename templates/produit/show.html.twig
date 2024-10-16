@@ -53,11 +53,14 @@
                         <input type="email" class="form-control" id="email" value="{{ produit.EMAIL }}" readonly>
                     </div>
                 </div>
-
                 <div class="row mb-3">
                     <div class="col-md-4">
                         <label for="pays" class="form-label">Pays</label>
                         <input type="text" class="form-control" id="pays" value="{{ produit.IDPAYS.libpays }}" readonly>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="sous" class="form-label">Sous pays</label>
+                        <input type="text" class="form-control" id="sous" value="{{ produit.SEQSOUSPAYS.libsouspays }}" readonly> <!-- Mettre à jour ici -->
                     </div>
                 </div>
             </form>

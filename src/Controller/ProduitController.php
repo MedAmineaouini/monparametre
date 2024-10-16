@@ -59,7 +59,8 @@ final class ProduitController extends AbstractController
         // Construire la requête
         $queryBuilder = $produitRepository->createQueryBuilder('p')
             ->leftJoin('p.IDPAYS', 'pays')
-            ->addSelect('pays');
+            ->leftJoin('p.SEQSOUSPAYS', 'souspays') // Assurez-vous de faire un join ici
+            ->addSelect('pays', 'souspays'); // Inclure aussi souspays
 
         // Filtrer par code produit si fourni
         if ($codeProd) {
@@ -78,11 +79,10 @@ final class ProduitController extends AbstractController
             $queryBuilder->andWhere('pays.IDPAYS = :pays')
                 ->setParameter('pays', $pays);
         }
+
         // Exécuter la requête
         $query = $queryBuilder->getQuery();
-        // Debug: afficher la requête SQL (décommenter si nécessaire)
-        // $sql = $query->getSQL();
-        // var_dump($sql);
+
         try {
             $produits = $query->getArrayResult();
 
@@ -92,7 +92,6 @@ final class ProduitController extends AbstractController
             }
         } catch (\Exception $e) {
             // Gérer l'erreur (journalisation, message d'erreur, etc.)
-            // Vous pourriez utiliser un logger au lieu de var_dump
             var_dump($e->getMessage());
             die();
         }
