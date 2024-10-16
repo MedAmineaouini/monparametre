@@ -1,33 +1,14 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit Produit{% endblock %}
+{% block title %}Modification produit{% endblock %}
 
 {% block body %}
 <div class="card card-h-10 mt-1">
     <div class="card-body table-responsive">
-        <div class="row d-flex flex-column flex-md-row justify-content-between align-items-center mb-3">
-
-            <div class="col-md-8">
-                <h4 class="page-title">Détails produit ( {{ produit.CODEPROD }} : {{ produit.LIBPROD }} )</h4>
-            </div>
-            <div class="col-md-4 text-end">
-                <div class="d-flex align-items-center justify-content-between mt-2 mt-md-0">
-                    <a href="{{ path('app_produit_index') }}" class="btn btn-secondary me-2 ql-size">
-                        <i class="uil uil-arrow-left"></i> Retour
-                    </a>
-                    <form method="post" action="{{ path('app_produit_delete', {'SEQPROD': produit.SEQPROD}) }}"
-                          onsubmit="return confirm('Are you sure you want to delete this item?');" class="mb-0">
-                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ produit.SEQPROD) }}">
-                        <button class="btn btn-danger" type="submit">
-                            <i class="uil uil-trash-alt"></i> Supprimer
-                        </button>
-                    </form>
-                </div>
-
-            </div>
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h4>Modifier  produit ( {{ produit.CODEPROD }} : {{ produit.LIBPROD }} )</h4>
         </div>
-
-        {{ include('produit/_form.html.twig', {'button_label': 'Enregistrer'}) }}
+    {{ include('produit/_form.html.twig', {'button_label': 'Enregistrer'}) }}
 
     </div>
 </div>

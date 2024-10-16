@@ -10,25 +10,6 @@
                 <div class="col-md-8">
                     <h1 class="page-title">Détails produit ( {{ produit.CODEPROD }} : {{ produit.LIBPROD }} )</h1>
                 </div>
-                <div class="col-md-4 text-end">
-                    <div class="d-flex align-items-center justify-content-between mt-2 mt-md-0">
-                        <a href="{{ path('app_produit_index') }}" class="btn btn-secondary me-2">
-                            <i class="uil uil-arrow-left"></i> Retour
-                        </a>
-                        <a href="{{ path('app_produit_edit', {'SEQPROD': produit.SEQPROD}) }}"
-                           class="btn btn-primary me-2">
-                            <i class="uil uil-pen"></i> Modifier
-                        </a>
-                        <form method="post" action="{{ path('app_produit_delete', {'SEQPROD': produit.SEQPROD}) }}"
-                              onsubmit="return confirm('Are you sure you want to delete this item?');" class="mb-0">
-                            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ produit.SEQPROD) }}">
-                            <button class="btn btn-danger" type="submit">
-                                <i class="uil uil-trash-alt"></i> Supprimer
-                            </button>
-                        </form>
-                    </div>
-
-                </div>
             </div>
 
             <ul class="nav nav-pills bg-nav-pills nav-justified mb-3">
@@ -95,7 +76,7 @@
                             <div class="col-12 col-md-4">
                                 <label for="sous" class="form-label">Sous pays</label>
                                 <input type="text" class="form-control" id="sous"
-                                       value="{{ produit.SEQSOUSPAYS.libsouspays }}" readonly> <!-- Mettre à jour ici -->
+                                       value="{{ (produit.SEQSOUSPAYS) ? produit.SEQSOUSPAYS.libsouspays : '' }}" readonly> <!-- Mettre à jour ici -->
                             </div>
                         </div>
                     </form>
@@ -107,6 +88,27 @@
                     <p>...</p>
                 </div>
             </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="d-flex justify-content-end mt-2 mt-md-0">
+                        <a href="{{ path('app_produit_index') }}" class="btn btn-secondary ms-2">
+                            <i class="uil uil-arrow-left"></i> Retour
+                        </a>
+                        <a href="{{ path('app_produit_edit', {'SEQPROD': produit.SEQPROD}) }}" class="btn btn-primary ms-2">
+                            <i class="uil uil-pen"></i> Modifier
+                        </a>
+                        <form method="post" action="{{ path('app_produit_delete', {'SEQPROD': produit.SEQPROD}) }}"
+                              onsubmit="return confirm('Are you sure you want to delete this item?');" class="mb-0 ms-2">
+                            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ produit.SEQPROD) }}">
+                            <button class="btn btn-danger" type="submit">
+                                <i class="uil uil-trash-alt"></i> Supprimer
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+
         </div>
 
     </div>
