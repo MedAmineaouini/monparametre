@@ -1,0 +1,4 @@
+<form method="post" action="{{ path('app_categ_chambre_produit_delete', {'SEQCATEGCHAMBREPRODUIT': categ_chambre_produit.SEQCATEGCHAMBREPRODUIT}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
+    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ categ_chambre_produit.SEQCATEGCHAMBREPRODUIT) }}">
+    <button class="btn">Delete</button>
+</form>

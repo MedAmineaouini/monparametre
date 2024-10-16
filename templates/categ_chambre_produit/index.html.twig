@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}CategChambreProduit index{% endblock %}
+
+{% block body %}
+    <h1>CategChambreProduit index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>SEQCATEGCHAMBREPRODUIT</th>
+                <th>SEQCATEGORIECHAMBRE</th>
+                <th>LIBCATEGCHAMBREPRODUIT</th>
+                <th>LIBCATEGCHAMBREPRODUIT2</th>
+                <th>STOPSALE</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for categ_chambre_produit in categ_chambre_produits %}
+            <tr>
+                <td>{{ categ_chambre_produit.SEQCATEGCHAMBREPRODUIT }}</td>
+                <td>{{ categ_chambre_produit.SEQCATEGORIECHAMBRE }}</td>
+                <td>{{ categ_chambre_produit.LIBCATEGCHAMBREPRODUIT }}</td>
+                <td>{{ categ_chambre_produit.LIBCATEGCHAMBREPRODUIT2 }}</td>
+                <td>{{ categ_chambre_produit.STOPSALE }}</td>
+                <td>
+                    <a href="{{ path('app_categ_chambre_produit_show', {'SEQCATEGCHAMBREPRODUIT': categ_chambre_produit.SEQCATEGCHAMBREPRODUIT}) }}">show</a>
+                    <a href="{{ path('app_categ_chambre_produit_edit', {'SEQCATEGCHAMBREPRODUIT': categ_chambre_produit.SEQCATEGCHAMBREPRODUIT}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_categ_chambre_produit_new') }}">Create new</a>
+{% endblock %}

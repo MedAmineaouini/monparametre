@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}CategChambreProduit{% endblock %}
+
+{% block body %}
+    <h1>CategChambreProduit</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>SEQCATEGCHAMBREPRODUIT</th>
+                <td>{{ categ_chambre_produit.SEQCATEGCHAMBREPRODUIT }}</td>
+            </tr>
+            <tr>
+                <th>SEQCATEGORIECHAMBRE</th>
+                <td>{{ categ_chambre_produit.SEQCATEGORIECHAMBRE }}</td>
+            </tr>
+            <tr>
+                <th>LIBCATEGCHAMBREPRODUIT</th>
+                <td>{{ categ_chambre_produit.LIBCATEGCHAMBREPRODUIT }}</td>
+            </tr>
+            <tr>
+                <th>LIBCATEGCHAMBREPRODUIT2</th>
+                <td>{{ categ_chambre_produit.LIBCATEGCHAMBREPRODUIT2 }}</td>
+            </tr>
+            <tr>
+                <th>STOPSALE</th>
+                <td>{{ categ_chambre_produit.STOPSALE }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_categ_chambre_produit_index') }}">back to list</a>
+
+    <a href="{{ path('app_categ_chambre_produit_edit', {'SEQCATEGCHAMBREPRODUIT': categ_chambre_produit.SEQCATEGCHAMBREPRODUIT}) }}">edit</a>
+
+    {{ include('categ_chambre_produit/_delete_form.html.twig') }}
+{% endblock %}

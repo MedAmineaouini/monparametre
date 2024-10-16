@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\ProduitRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ProduitRepository::class)]
@@ -34,6 +36,17 @@ class Produit
     #[ORM\ManyToOne(inversedBy: 'produits', targetEntity: Souspays::class)]
     #[ORM\JoinColumn(name: 'SEQSOUSPAYS', referencedColumnName: 'SEQSOUSPAYS', nullable: true)]
     private ?Souspays $SEQSOUSPAYS = null;
+
+    /**
+     * @var Collection<int, CategChambreProduit>
+     */
+    #[ORM\OneToMany(targetEntity: CategChambreProduit::class, mappedBy: 'SEQPROD', orphanRemoval: true)]
+    private Collection $categChambreProduits;
+
+    public function __construct()
+    {
+        $this->categChambreProduits = new ArrayCollection();
+    }
 
 
     public function getSEQPROD(): ?int
@@ -128,6 +141,36 @@ class Produit
     public function setSEQSOUSPAYS(?Souspays $SEQSOUSPAYS): static
     {
         $this->SEQSOUSPAYS = $SEQSOUSPAYS;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, CategChambreProduit>
+     */
+    public function getCategChambreProduits(): Collection
+    {
+        return $this->categChambreProduits;
+    }
+
+    public function addCategChambreProduit(CategChambreProduit $categChambreProduit): static
+    {
+        if (!$this->categChambreProduits->contains($categChambreProduit)) {
+            $this->categChambreProduits->add($categChambreProduit);
+            $categChambreProduit->setSEQPROD($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCategChambreProduit(CategChambreProduit $categChambreProduit): static
+    {
+        if ($this->categChambreProduits->removeElement($categChambreProduit)) {
+            // set the owning side to null (unless already changed)
+            if ($categChambreProduit->getSEQPROD() === $this) {
+                $categChambreProduit->setSEQPROD(null);
+            }
+        }
 
         return $this;
     }
