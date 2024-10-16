@@ -53,7 +53,7 @@
                     </div>
                 </div>
             </form>
-
+{{ dump(produits) }}
             <table id="basic-datatable" class="table">
                 <thead>
                 <tr>
@@ -64,6 +64,7 @@
                     <th>Téléphone</th>
                     <th>Email</th>
                     <th>Pays</th>
+                    <th>Sous pays</th>
                     <th>Actions</th>
                 </tr>
                 </thead>
@@ -76,6 +77,7 @@
                         <td>{{ produit.ADRESSE }}</td>
                         <td>{{ produit.TEL }}</td>
                         <td>{{ produit.EMAIL }}</td>
+                        <td>{{ produit.IDPAYS.LIBPAYS }}</td>
                         <td>{{ produit.IDPAYS.LIBPAYS }}</td>
                         <td>
                             <a href="{{ path('app_produit_show', {'SEQPROD': produit.SEQPROD}) }}">show</a>

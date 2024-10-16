@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20241016083620 extends AbstractMigration
+final class Version20241016102234 extends AbstractMigration
 {
     public function getDescription(): string
     {
@@ -21,6 +21,8 @@ final class Version20241016083620 extends AbstractMigration
     {
         // this up() migration is auto-generated, please modify it to your needs
         $this->addSql('ALTER TABLE PRODUIT ADD SEQSOUSPAYS INT');
+        $this->addSql('ALTER TABLE PRODUIT ADD CONSTRAINT FK_29A5EC27FE3540F4 FOREIGN KEY (SEQSOUSPAYS) REFERENCES SOUSPAYS (SEQSOUSPAYS)');
+        $this->addSql('CREATE INDEX IDX_29A5EC27FE3540F4 ON PRODUIT (SEQSOUSPAYS)');
     }
 
     public function down(Schema $schema): void
@@ -36,7 +38,9 @@ final class Version20241016083620 extends AbstractMigration
         $this->addSql('CREATE SCHEMA db_owner');
         $this->addSql('CREATE SCHEMA db_securityadmin');
         $this->addSql('CREATE SCHEMA dbo');
-        $this->addSql('ALTER TABLE produit DROP COLUMN seqsouspays');
+        $this->addSql('ALTER TABLE produit DROP CONSTRAINT FK_29A5EC27FE3540F4');
+        $this->addSql('DROP INDEX IDX_29A5EC27FE3540F4 ON produit');
+        $this->addSql('ALTER TABLE produit DROP COLUMN SEQSOUSPAYS');
         $this->addSql('ALTER TABLE produit ALTER COLUMN libprod NVARCHAR(50) NOT NULL');
         $this->addSql('ALTER TABLE produit ADD CONSTRAINT DF_29A5EC27_89834DDB DEFAULT \'\' FOR libprod');
         $this->addSql('ALTER TABLE produit ALTER COLUMN adresse NVARCHAR(255)');

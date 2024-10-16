@@ -31,8 +31,9 @@ class Produit
     #[ORM\Column(length: 5)]
     private ?string $CODEPROD = null;
 
-    #[ORM\Column(nullable: true)]
-    private ?int $SEQSOUSPAYS = null;
+    #[ORM\ManyToOne(inversedBy: 'produits', targetEntity: Souspays::class)]
+    #[ORM\JoinColumn(name: 'SEQSOUSPAYS', referencedColumnName: 'SEQSOUSPAYS', nullable: true)]
+    private ?Souspays $SEQSOUSPAYS = null;
 
 
     public function getSEQPROD(): ?int
@@ -119,16 +120,17 @@ class Produit
         return $this;
     }
 
-    public function getSEQSOUSPAYS(): ?int
+    public function getSEQSOUSPAYS(): ?Souspays
     {
         return $this->SEQSOUSPAYS;
     }
 
-    public function setSEQSOUSPAYS(?int $SEQSOUSPAYS): static
+    public function setSEQSOUSPAYS(?Souspays $SEQSOUSPAYS): static
     {
         $this->SEQSOUSPAYS = $SEQSOUSPAYS;
 
         return $this;
     }
+
 
 }

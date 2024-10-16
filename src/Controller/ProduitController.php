@@ -9,6 +9,7 @@ use App\Repository\ProduitRepository;
 use App\Repository\SouspaysRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -17,7 +18,7 @@ use Symfony\Component\Routing\Attribute\Route;
 #[Route('/produit')]
 final class ProduitController extends AbstractController
 {
-    #[Route( name: 'get_souspays',  methods: ['GET'])]
+    #[Route( '/getSouspays',name: 'get_souspays',  methods: ['GET'])]
     public function getSouspays(Request $request, SouspaysRepository $souspaysRepository): JsonResponse
     {
         $idPays = $request->query->get('IDPAYS');
