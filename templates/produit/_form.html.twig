@@ -1,53 +1,86 @@
 {{ form_start(form) }}
 
-<div class="row">
-    <div class="col-md-4 mb-3">
-        {{ form_label(form.CODEPROD) }}
-        {{ form_widget(form.CODEPROD, {'attr': {'class': 'form-control'}}) }}
-        {{ form_errors(form.CODEPROD) }}
-    </div>
-    <div class="col-md-4 mb-3">
-        {{ form_label(form.LIBPROD) }}
-        {{ form_widget(form.LIBPROD, {'attr': {'class': 'form-control'}}) }}
-        {{ form_errors(form.LIBPROD) }}
-    </div>
 
-    <div class="col-md-4 mb-3">
-        {{ form_label(form.ADRESSE) }}
-        {{ form_widget(form.ADRESSE, {'attr': {'class': 'form-control'}}) }}
-        {{ form_errors(form.ADRESSE) }}
+<ul class="nav nav-pills bg-nav-pills nav-justified mb-3">
+    <li class="nav-item">
+        <a href="#detailproduit" data-bs-toggle="tab" aria-expanded="false" class="nav-link rounded-0 active">
+            <i class="mdi mdi-home-variant d-md-none d-block"></i>
+            <span class="d-none d-md-block">Produit</span>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a href="#profile1" data-bs-toggle="tab" aria-expanded="true" class="nav-link rounded-0">
+            <i class="mdi mdi-account-circle d-md-none d-block"></i>
+            <span class="d-none d-md-block">Stock</span>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a href="#settings1" data-bs-toggle="tab" aria-expanded="false" class="nav-link rounded-0">
+            <i class="mdi mdi-account-cash d-md-none d-block"></i>
+            <span class="d-none d-md-block">Tarification</span>
+        </a>
+    </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane show active " id="detailproduit">
+        <div class="row">
+            <div class="col-md-4 mb-3">
+                {{ form_label(form.CODEPROD) }}
+                {{ form_widget(form.CODEPROD, {'attr': {'class': 'form-control'}}) }}
+                {{ form_errors(form.CODEPROD) }}
+            </div>
+            <div class="col-md-4 mb-3">
+                {{ form_label(form.LIBPROD) }}
+                {{ form_widget(form.LIBPROD, {'attr': {'class': 'form-control'}}) }}
+                {{ form_errors(form.LIBPROD) }}
+            </div>
+
+            <div class="col-md-4 mb-3">
+                {{ form_label(form.ADRESSE) }}
+                {{ form_widget(form.ADRESSE, {'attr': {'class': 'form-control'}}) }}
+                {{ form_errors(form.ADRESSE) }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4 mb-3">
+                {{ form_label(form.TEL) }}
+                {{ form_widget(form.TEL, {'attr': {'class': 'form-control'}}) }}
+                {{ form_errors(form.TEL) }}
+            </div>
+
+            <div class="col-md-4 mb-3">
+                {{ form_label(form.EMAIL) }}
+                {{ form_widget(form.EMAIL, {'attr': {'class': 'form-control'}}) }}
+                {{ form_errors(form.EMAIL) }}
+            </div>
+
+            <div class="col-md-4 mb-3">
+                {{ form_label(form.IDPAYS) }}
+                {{ form_widget(form.IDPAYS, {'attr': {'class': 'form-select'}}) }}
+                {{ form_errors(form.IDPAYS) }}
+            </div>
+            <div class="col-md-4 mb-3">
+                {{ form_label(form.SEQSOUSPAYS) }}
+                {{ form_widget(form.SEQSOUSPAYS, {'attr': {'class': 'form-select'}}) }}
+                {{ form_errors(form.SEQSOUSPAYS) }}
+            </div>
+        </div>
+
+    </div>
+    <div class="tab-pane" id="profile1">
+        <p>...</p>
+    </div>
+    <div class="tab-pane" id="settings1">
+        <p>...</p>
+    </div>
+    <div class="row" style="text-align: center">
+        <div class="col-md-6 text-sm-end mb-3">
+            <button class="btn btn-success">{{ button_label|default('Save') }}</button>
+        </div>
+        <div class="col-md-3 mb-3"><a class="btn btn-secondary me-2" href="{{ path('app_produit_index') }}"><i class="uil uil-arrow-left"></i> Retour</a></div>
     </div>
 </div>
 
-<div class="row">
-    <div class="col-md-4 mb-3">
-        {{ form_label(form.TEL) }}
-        {{ form_widget(form.TEL, {'attr': {'class': 'form-control'}}) }}
-        {{ form_errors(form.TEL) }}
-    </div>
 
-    <div class="col-md-4 mb-3">
-        {{ form_label(form.EMAIL) }}
-        {{ form_widget(form.EMAIL, {'attr': {'class': 'form-control'}}) }}
-        {{ form_errors(form.EMAIL) }}
-    </div>
-
-    <div class="col-md-4 mb-3">
-        {{ form_label(form.IDPAYS) }}
-        {{ form_widget(form.IDPAYS, {'attr': {'class': 'form-select'}}) }}
-        {{ form_errors(form.IDPAYS) }}
-    </div>
-    <div class="col-md-4 mb-3">
-        {{ form_label(form.SEQSOUSPAYS) }}
-        {{ form_widget(form.SEQSOUSPAYS, {'attr': {'class': 'form-select'}}) }}
-        {{ form_errors(form.SEQSOUSPAYS) }}
-    </div>
-</div>
-<div class="row" style="text-align: center">
-    <div class="col-md-2 mb-3">
-        <button class="btn btn-primary">{{ button_label|default('Save') }}</button>
-    </div>
-    <div class="col-md-2 mb-3"><a class="btn btn-success" href="{{ path('app_produit_index') }}">back to list</a></div>
-
-</div>
 {{ form_end(form) }}

@@ -15,7 +15,8 @@
                         <a href="{{ path('app_produit_index') }}" class="btn btn-secondary me-2">
                             <i class="uil uil-arrow-left"></i> Retour
                         </a>
-                        <a href="{{ path('app_produit_edit', {'SEQPROD': produit.SEQPROD}) }}" class="btn btn-primary me-2">
+                        <a href="{{ path('app_produit_edit', {'SEQPROD': produit.SEQPROD}) }}"
+                           class="btn btn-primary me-2">
                             <i class="uil uil-pen"></i> Modifier
                         </a>
                         <form method="post" action="{{ path('app_produit_delete', {'SEQPROD': produit.SEQPROD}) }}"
@@ -29,84 +30,84 @@
 
                 </div>
             </div>
+
+            <ul class="nav nav-pills bg-nav-pills nav-justified mb-3">
+                <li class="nav-item">
+                    <a href="#detailproduit" data-bs-toggle="tab" aria-expanded="false" class="nav-link rounded-0 active">
+                        <i class="mdi mdi-home-variant d-md-none d-block"></i>
+                        <span class="d-none d-md-block">Produit</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#profile1" data-bs-toggle="tab" aria-expanded="true" class="nav-link rounded-0">
+                        <i class="mdi mdi-account-circle d-md-none d-block"></i>
+                        <span class="d-none d-md-block">Stock</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#settings1" data-bs-toggle="tab" aria-expanded="false" class="nav-link rounded-0">
+                        <i class="mdi mdi-account-cash d-md-none d-block"></i>
+                        <span class="d-none d-md-block">Tarification</span>
+                    </a>
+                </li>
+            </ul>
+
+            <div class="tab-content">
+                <div class="tab-pane show active " id="detailproduit">
+                    <form>
+                        <div class="row mb-3">
+                            <div class="col-12 col-md-4">
+                                <label for="seqprod" class="form-label">SEQPROD</label>
+                                <input type="text" class="form-control" id="seqprod" value="{{ produit.SEQPROD }}" readonly>
+                            </div>
+                            <div class="col-12 col-md-4">
+                                <label for="codeprod" class="form-label">CODEPROD</label>
+                                <input type="text" class="form-control" id="codeprod" value="{{ produit.CODEPROD }}"
+                                       readonly>
+                            </div>
+                            <div class="col-12 col-md-4">
+                                <label for="libprod" class="form-label">LIBPROD</label>
+                                <input type="text" class="form-control" id="libprod" value="{{ produit.LIBPROD }}" readonly>
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-12 col-md-4">
+                                <label for="adresse" class="form-label">ADRESSE</label>
+                                <input type="text" class="form-control" id="adresse" value="{{ produit.ADRESSE }}" readonly>
+                            </div>
+                            <div class="col-12 col-md-4">
+                                <label for="tel" class="form-label">TEL</label>
+                                <input type="text" class="form-control" id="tel" value="{{ produit.TEL }}" readonly>
+                            </div>
+                            <div class="col-12 col-md-4">
+                                <label for="email" class="form-label">EMAIL</label>
+                                <input type="email" class="form-control" id="email" value="{{ produit.EMAIL }}" readonly>
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-12 col-md-4">
+                                <label for="pays" class="form-label">Pays</label>
+                                <input type="text" class="form-control" id="pays" value="{{ produit.IDPAYS.libpays }}"
+                                       readonly>
+                            </div>
+                            <div class="col-12 col-md-4">
+                                <label for="sous" class="form-label">Sous pays</label>
+                                <input type="text" class="form-control" id="sous"
+                                       value="{{ produit.SEQSOUSPAYS.libsouspays }}" readonly> <!-- Mettre à jour ici -->
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="tab-pane" id="profile1">
+                    <p>...</p>
+                </div>
+                <div class="tab-pane" id="settings1">
+                    <p>...</p>
+                </div>
+            </div>
         </div>
 
-        <ul class="nav nav-pills bg-nav-pills nav-justified mb-3">
-            <li class="nav-item">
-                <a href="#detailproduit" data-bs-toggle="tab" aria-expanded="false" class="nav-link rounded-0 active">
-                    <i class="mdi mdi-home-variant d-md-none d-block"></i>
-                    <span class="d-none d-md-block">Produit</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="#profile1" data-bs-toggle="tab" aria-expanded="true" class="nav-link rounded-0">
-                    <i class="mdi mdi-account-circle d-md-none d-block"></i>
-                    <span class="d-none d-md-block">Stock</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="#settings1" data-bs-toggle="tab" aria-expanded="false" class="nav-link rounded-0">
-                    <i class="mdi mdi-account-cash d-md-none d-block"></i>
-                    <span class="d-none d-md-block">Tarification</span>
-                </a>
-            </li>
-        </ul>
-
-        <div class="tab-content">
-            <div class="tab-pane show active" id="detailproduit">
-                <form>
-                    <div class="row mb-3">
-                        <div class="col-12 col-md-4">
-                            <label for="seqprod" class="form-label">SEQPROD</label>
-                            <input type="text" class="form-control" id="seqprod" value="{{ produit.SEQPROD }}" readonly>
-                        </div>
-                        <div class="col-12 col-md-4">
-                            <label for="codeprod" class="form-label">CODEPROD</label>
-                            <input type="text" class="form-control" id="codeprod" value="{{ produit.CODEPROD }}"
-                                   readonly>
-                        </div>
-                        <div class="col-12 col-md-4">
-                            <label for="libprod" class="form-label">LIBPROD</label>
-                            <input type="text" class="form-control" id="libprod" value="{{ produit.LIBPROD }}" readonly>
-                        </div>
-                    </div>
-
-                    <div class="row mb-3">
-                        <div class="col-12 col-md-4">
-                            <label for="adresse" class="form-label">ADRESSE</label>
-                            <input type="text" class="form-control" id="adresse" value="{{ produit.ADRESSE }}" readonly>
-                        </div>
-                        <div class="col-12 col-md-4">
-                            <label for="tel" class="form-label">TEL</label>
-                            <input type="text" class="form-control" id="tel" value="{{ produit.TEL }}" readonly>
-                        </div>
-                        <div class="col-12 col-md-4">
-                            <label for="email" class="form-label">EMAIL</label>
-                            <input type="email" class="form-control" id="email" value="{{ produit.EMAIL }}" readonly>
-                        </div>
-                    </div>
-
-                    <div class="row mb-3">
-                        <div class="col-12 col-md-4">
-                            <label for="pays" class="form-label">Pays</label>
-                            <input type="text" class="form-control" id="pays" value="{{ produit.IDPAYS.libpays }}"
-                                   readonly>
-                        </div>
-                        <div class="col-12 col-md-4">
-                            <label for="sous" class="form-label">Sous pays</label>
-                            <input type="text" class="form-control" id="sous"
-                                   value="{{ produit.SEQSOUSPAYS.libsouspays }}" readonly> <!-- Mettre à jour ici -->
-                        </div>
-                    </div>
-                </form>
-            </div>
-            <div class="tab-pane" id="profile1">
-                <p>...</p>
-            </div>
-            <div class="tab-pane" id="settings1">
-                <p>...</p>
-            </div>
-        </div>
-    </div>
     </div>
 {% endblock %}
