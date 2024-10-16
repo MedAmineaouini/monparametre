@@ -20,6 +20,9 @@
         .form-control {
             width: 200px; /* Largeur fixe pour les champs */
         }
+        ::placeholder{
+            text-transform: lowercase;
+        }
     </style>
     <div class="card card-h-10 mt-1">
         <div class="card-body table-responsive">
@@ -33,7 +36,7 @@
             <form method="get" action="{{ path('app_produit_index') }}" class="form-container mb-3">
                 <div class="row g-2"> <!-- Utilisez 'row' et 'g-2' pour l'espacement -->
                     <div class="col-12 col-md col-sm col-lg">
-                        <input type="text" name="codeprod" value="{{ app.request.query.get('codeprod') }}" class="form-control" placeholder="Code Produit">
+                        <input type="text" name="codeprod" value="{{ app.request.query.get('codeprod') }}" class="form-control text-uppercase" placeholder="Code Produit" maxlength="5">
                     </div>
                     <div class="col-12 col-md col-sm col-lg">
                         <input type="text" name="libprod" value="{{ app.request.query.get('libprod') }}" class="form-control" placeholder="Libellé Produit">
@@ -85,8 +88,8 @@
                             </td>
                         </tr>
                     {% else %}
-                        <tr>
-                            <td colspan="9">Aucun enregistrement trouvé</td> <!-- Changez le nombre de colonnes si nécessaire -->
+                        <tr >
+                            <td colspan="9" class="text-center p-2">Aucun enregistrement trouvé</td> <!-- Changez le nombre de colonnes si nécessaire -->
                         </tr>
                     {% endfor %}
                     </tbody>
