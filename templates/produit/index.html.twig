@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Produit index{% endblock %}
+{% block title %}Liste des Produits{% endblock %}
 
 {% block body %}
     <style>
@@ -26,19 +26,19 @@
             <div class="d-flex justify-content-between align-items-center mb-3">
                 <h3>Liste produits</h3>
                 <div class="dropdown">
-                    <a class="btn btn-primary" href="{{ path('app_produit_new') }}">Ajouter produit</a>
+                    <a class="btn btn-primary" href="{{ path('app_produit_new') }}"> <i class="uil uil-plus-circle"></i> Ajouter produit</a>
                 </div>
             </div>
 
             <form method="get" action="{{ path('app_produit_index') }}" class="form-container mb-3">
-                <div class="form-row">
-                    <div class="col">
+                <div class="row g-2"> <!-- Utilisez 'row' et 'g-2' pour l'espacement -->
+                    <div class="col-12 col-md col-sm col-lg">
                         <input type="text" name="codeprod" value="{{ app.request.query.get('codeprod') }}" class="form-control" placeholder="Code Produit">
                     </div>
-                    <div class="col">
+                    <div class="col-12 col-md col-sm col-lg">
                         <input type="text" name="libprod" value="{{ app.request.query.get('libprod') }}" class="form-control" placeholder="Libellé Produit">
                     </div>
-                    <div class="col">
+                    <div class="col-12 col-md col-sm col-lg">
                         <select name="pays" class="form-control">
                             <option value="">-- Sélectionner un pays --</option>
                             {% for pays in paysList %}
@@ -48,49 +48,51 @@
                             {% endfor %}
                         </select>
                     </div>
-                    <div class="col">
-                        <button type="submit" class="btn btn-success">Filtrer</button>
+                    <div class="col-12 col-md col-sm col-lg"> <!-- 'col-md-auto' pour le bouton de taille automatique -->
+                        <button type="submit" class="btn btn-success"><i class="uil uil-search"></i> Filtrer</button>
                     </div>
                 </div>
             </form>
-{{ dump(produits[0]) }}
-            <table id="basic-datatable" class="table">
-                <thead>
-                <tr>
-                    <th>N°</th>
-                    <th>Code produit</th>
-                    <th>Libillé</th>
-                    <th>Adresse</th>
-                    <th>Téléphone</th>
-                    <th>Email</th>
-                    <th>Pays</th>
-                    <th>Sous pays</th>
-                    <th>Actions</th>
-                </tr>
-                </thead>
-                <tbody>
-                {% for produit in produits %}
+            <div class="table-responsive"> <!-- Ajoutez cette div pour le défilement responsive -->
+                <table id="basic-datatable" class="table">
+                    <thead>
                     <tr>
-                        <td>{{ produit.SEQPROD }}</td>
-                        <td>{{ produit.CODEPROD }}</td>
-                        <td>{{ produit.LIBPROD }}</td>
-                        <td>{{ produit.ADRESSE }}</td>
-                        <td>{{ produit.TEL }}</td>
-                        <td>{{ produit.EMAIL }}</td>
-                        <td>{{ produit.IDPAYS.LIBPAYS }}</td>
-                        <td>{{ produit.IDPAYS.LIBPAYS }}</td>
-                        <td>
-                            <a href="{{ path('app_produit_show', {'SEQPROD': produit.SEQPROD}) }}">show</a>
-                            <a href="{{ path('app_produit_edit', {'SEQPROD': produit.SEQPROD}) }}">edit</a>
-                        </td>
+                        <th>N°</th>
+                        <th class="text-nowrap d-none d-md-table-cell">Code produit</th>
+                        <th >Libellé</th>
+                        <th class="text-nowrap d-none d-md-table-cell">Adresse</th>
+                        <th class="text-nowrap d-none d-md-table-cell">Téléphone</th>
+                        <th class="text-nowrap d-none d-md-table-cell">Email</th>
+                        <th class="text-nowrap d-none d-md-table-cell">Pays</th>
+                        <th class="text-nowrap d-none d-md-table-cell">Sous pays</th>
+                        <th>Actions</th>
                     </tr>
-                {% else %}
-                    <tr>
-                        <td colspan="7">No records found</td>
-                    </tr>
-                {% endfor %}
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                    {% for produit in produits %}
+                        <tr>
+                            <td>{{ produit.SEQPROD }}</td>
+                            <td class="d-none d-md-table-cell">{{ produit.CODEPROD }}</td>
+                            <td class="text-nowrap">{{ produit.LIBPROD }}</td>
+                            <td class="text-nowrap d-none d-md-table-cell">{{ produit.ADRESSE }}</td>
+                            <td class="text-nowrap d-none d-md-table-cell">{{ produit.TEL }}</td>
+                            <td class="text-nowrap d-none d-md-table-cell">{{ produit.EMAIL }}</td>
+                            <td class="text-nowrap d-none d-md-table-cell">{{ produit.IDPAYS.LIBPAYS }}</td>
+                            <td class="text-nowrap d-none d-md-table-cell">{{ (produit.SEQSOUSPAYS) ? produit.SEQSOUSPAYS.LIBSOUSPAYS : '' }}</td>
+                            <td>
+                                <a title="Détails de ce produit" href="{{ path('app_produit_show', {'SEQPROD': produit.SEQPROD}) }}"><i class="uil uil-eye"></i></a>
+                                <a title="Modifier ce produit" href="{{ path('app_produit_edit', {'SEQPROD': produit.SEQPROD}) }}"><i class="uil uil-edit" style="color: #0ac58f"></i></a>
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="9">Aucun enregistrement trouvé</td> <!-- Changez le nombre de colonnes si nécessaire -->
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
         </div>
     </div>
 {% endblock %}
