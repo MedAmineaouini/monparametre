@@ -31,6 +31,9 @@ class Produit
     #[ORM\Column(length: 5)]
     private ?string $CODEPROD = null;
 
+    #[ORM\Column(nullable: true)]
+    private ?int $SEQSOUSPAYS = null;
+
 
     public function getSEQPROD(): ?int
     {
@@ -112,6 +115,18 @@ class Produit
     public function setCODEPROD(string $CODEPROD): static
     {
         $this->CODEPROD = $CODEPROD;
+
+        return $this;
+    }
+
+    public function getSEQSOUSPAYS(): ?int
+    {
+        return $this->SEQSOUSPAYS;
+    }
+
+    public function setSEQSOUSPAYS(?int $SEQSOUSPAYS): static
+    {
+        $this->SEQSOUSPAYS = $SEQSOUSPAYS;
 
         return $this;
     }

@@ -37,14 +37,35 @@
         {{ form_widget(form.IDPAYS, {'attr': {'class': 'form-select'}}) }}
         {{ form_errors(form.IDPAYS) }}
     </div>
+    <div class="col-md-4 mb-3">
+        {{ form_label(form.SEQSOUSPAYS) }}
+        {{ form_widget(form.SEQSOUSPAYS, {'attr': {'class': 'form-select'}}) }}
+        {{ form_errors(form.SEQSOUSPAYS) }}
+    </div>
 </div>
 <div class="row" style="text-align: center">
     <div class="col-md-2 mb-3">
         <button class="btn btn-primary">{{ button_label|default('Save') }}</button>
     </div>
     <div class="col-md-2 mb-3"><a class="btn btn-success" href="{{ path('app_produit_index') }}">back to list</a></div>
-    <div class="col-md-2 mb-3" class="btn btn-primary"> {{ include('produit/_delete_form.html.twig') }}</div>
-
 
 </div>
+<script>
+    document.getElementById('produit_IDPAYS').addEventListener('change', function () {
+        var idPays = this.value;
+        var souspaysSelect = document.getElementById('produit_SEQSOUSPAYS');
+
+        fetch('/produit/getSouspays?IDPAYS=' + idPays)
+            .then(response => response.json())
+            .then(data => {
+                souspaysSelect.innerHTML = '';
+                data.forEach(function (souspays) {
+                    var option = document.createElement('option');
+                    option.value = souspays.id;
+                    option.text = souspays.name;
+                    souspaysSelect.appendChild(option);
+                });
+            });
+    });
+</script>
 {{ form_end(form) }}

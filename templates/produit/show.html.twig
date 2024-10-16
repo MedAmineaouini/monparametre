@@ -3,47 +3,65 @@
 {% block title %}Produit{% endblock %}
 
 {% block body %}
-<div class="card card-h-10 mt-1">
-    <div class="card-body table-responsive">
-        <div class="d-flex justify-content-between align-items-center mb-3">
-            <h3>Produit</h3>
-            <div class="dropdown">
-                <a href="{{ path('app_produit_index') }}" class="btn btn-secondary">Back to list</a>
-                <a href="{{ path('app_produit_edit', {'SEQPROD': produit.SEQPROD}) }}" class="btn btn-primary">Edit</a>
-                {{ include('produit/_delete_form.html.twig') }}
+    <div class="card card-h-10 mt-1">
+        <div class="card-body table-responsive">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h3>Détails produit ( {{ produit.CODEPROD }} : {{ produit.LIBPROD }} )</h3>
+                <div class="dropdown d-flex align-items-center justify-content-end">
+                    <a href="{{ path('app_produit_index') }}" class="btn btn-secondary me-2">
+                        <i class="uil uil-arrow-left"></i> Retour
+                    </a>
+                    <a href="{{ path('app_produit_edit', {'SEQPROD': produit.SEQPROD}) }}" class="btn btn-primary me-2">
+                        <i class="uil uil-pen"></i> Modifier
+                    </a>
+                    <form method="post" action="{{ path('app_produit_delete', {'SEQPROD': produit.SEQPROD}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
+                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ produit.SEQPROD) }}">
+                        <button class="btn btn-danger" type="submit">
+                            <i class="uil uil-trash-alt"></i> Supprimer
+                        </button>
+                    </form>
+                </div>
             </div>
-        </div>
-    <form>
-        <div class="mb-3">
-            <label for="seqprod" class="form-label">SEQPROD</label>
-            <input type="text" class="form-control" id="seqprod" value="{{ produit.SEQPROD }}" readonly>
-        </div>
-        <div class="mb-3">
-            <label for="libprod" class="form-label">CODEPROD</label>
-            <input type="text" class="form-control" id="libprod" value="{{ produit.CODEPROD }}" readonly>
-        </div>
-        <div class="mb-3">
-            <label for="libprod" class="form-label">LIBPROD</label>
-            <input type="text" class="form-control" id="libprod" value="{{ produit.LIBPROD }}" readonly>
-        </div>
-        <div class="mb-3">
-            <label for="adresse" class="form-label">ADRESSE</label>
-            <input type="text" class="form-control" id="adresse" value="{{ produit.ADRESSE }}" readonly>
-        </div>
-        <div class="mb-3">
-            <label for="tel" class="form-label">TEL</label>
-            <input type="text" class="form-control" id="tel" value="{{ produit.TEL }}" readonly>
-        </div>
-        <div class="mb-3">
-            <label for="email" class="form-label">EMAIL</label>
-            <input type="email" class="form-control" id="email" value="{{ produit.EMAIL }}" readonly>
-        </div>
-        <div class="mb-3">
-            <label for="email" class="form-label">Pays</label>
-            <input type="email" class="form-control" id="email" value="{{ produit.IDPAYS.libpays  }}" readonly>
-        </div>
 
-    </form>
+            <form>
+                <div class="row mb-3">
+                    <div class="col-md-4">
+                        <label for="seqprod" class="form-label">SEQPROD</label>
+                        <input type="text" class="form-control" id="seqprod" value="{{ produit.SEQPROD }}" readonly>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="codeprod" class="form-label">CODEPROD</label>
+                        <input type="text" class="form-control" id="codeprod" value="{{ produit.CODEPROD }}" readonly>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="libprod" class="form-label">LIBPROD</label>
+                        <input type="text" class="form-control" id="libprod" value="{{ produit.LIBPROD }}" readonly>
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col-md-4">
+                        <label for="adresse" class="form-label">ADRESSE</label>
+                        <input type="text" class="form-control" id="adresse" value="{{ produit.ADRESSE }}" readonly>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="tel" class="form-label">TEL</label>
+                        <input type="text" class="form-control" id="tel" value="{{ produit.TEL }}" readonly>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="email" class="form-label">EMAIL</label>
+                        <input type="email" class="form-control" id="email" value="{{ produit.EMAIL }}" readonly>
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col-md-4">
+                        <label for="pays" class="form-label">Pays</label>
+                        <input type="text" class="form-control" id="pays" value="{{ produit.IDPAYS.libpays }}" readonly>
+                    </div>
+                </div>
+            </form>
+        </div>
     </div>
-</div>
+
 {% endblock %}

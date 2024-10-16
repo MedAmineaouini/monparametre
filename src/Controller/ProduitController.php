@@ -6,6 +6,7 @@ use App\Entity\Produit;
 use App\Entity\Pays;
 use App\Form\ProduitType;
 use App\Repository\ProduitRepository;
+use App\Repository\SouspaysRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -16,6 +17,22 @@ use Symfony\Component\Routing\Attribute\Route;
 #[Route('/produit')]
 final class ProduitController extends AbstractController
 {
+    #[Route( name: 'get_souspays',  methods: ['GET'])]
+    public function getSouspays(Request $request, SouspaysRepository $souspaysRepository): JsonResponse
+    {
+        $idPays = $request->query->get('IDPAYS');
+        $souspays = $souspaysRepository->findBy(['IDPAYS' => $idPays]);
+
+        $response = [];
+        foreach ($souspays as $sp) {
+            $response[] = [
+                'id' => $sp->getSEQSOUSPAYS(),
+                'name' => $sp->getLIBSOUSPAYS(),
+            ];
+        }
+
+        return new JsonResponse($response);
+    }
 //    #[Route(name: 'app_produit_index', methods: ['GET'])]
 //    public function index(Request $request, ProduitRepository $produitRepository, EntityManagerInterface $entityManager): Response
 //
@@ -45,7 +62,7 @@ final class ProduitController extends AbstractController
 
         // Filtrer par code produit si fourni
         if ($codeProd) {
-            $queryBuilder->andWhere('p.SEQPROD LIKE :codeprod')
+            $queryBuilder->andWhere('p.CODEPROD LIKE :codeprod')
                 ->setParameter('codeprod', '%' . $codeProd . '%');
         }
 
@@ -87,16 +104,42 @@ final class ProduitController extends AbstractController
     }
 
 
-
-
     #[Route('/new', name: 'app_produit_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
         $produit = new Produit();
         $form = $this->createForm(ProduitType::class, $produit);
         $form->handleRequest($request);
+        // Récupérer le produit avec la plus grande valeur de codeprod
+        $query = $entityManager->createQuery(
+            'SELECT p 
+         FROM App\Entity\Produit p 
+         WHERE p.CODEPROD IS NOT NULL 
+         ORDER BY p.CODEPROD DESC'
+            )
+            ->setMaxResults(1);
+        $dernierProduit = $query->getOneOrNullResult();
 
+        // Générer le prochain codeprod
+        if ($dernierProduit) {
+            $dernierCodeprod = $dernierProduit->getCodeprod();
+            // Extraire le numéro et l'incrémenter
+            $numero = (int)substr($dernierCodeprod, 1); // Extrait la partie numérique (sans le "H")
+            $nouveauCodeprod = 'H' . str_pad($numero + 1, 4, '0', STR_PAD_LEFT);
+        } else {
+            // Si aucun produit n'existe encore, commencer par H0001
+            $nouveauCodeprod = 'H0001';
+        }
+
+        // Assigner la valeur générée à l'entité Produit
+        $produit->setCodeprod($nouveauCodeprod);
+
+        // Création du formulaire
+        $form = $this->createForm(ProduitType::class, $produit);
+        $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
+
+
             $entityManager->persist($produit);
             $entityManager->flush();
 
@@ -138,7 +181,7 @@ final class ProduitController extends AbstractController
     #[Route('/{SEQPROD}', name: 'app_produit_delete', methods: ['POST'])]
     public function delete(Request $request, Produit $produit, EntityManagerInterface $entityManager): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$produit->getSEQPROD(), $request->getPayload()->getString('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $produit->getSEQPROD(), $request->getPayload()->getString('_token'))) {
             $entityManager->remove($produit);
             $entityManager->flush();
         }

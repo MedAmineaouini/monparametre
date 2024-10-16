@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Pays;
 use App\Entity\Produit;
+use App\Entity\Souspays;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -16,6 +17,7 @@ class ProduitType extends AbstractType
         $builder
             ->add('CODEPROD', null, [
                 'label' => 'Code produit',  // Changer le label ici
+                'attr' => ['readonly' => true],
             ])
             ->add('LIBPROD', null, [
                 'label' => 'Libillé',  // Changer le label ici
@@ -34,6 +36,12 @@ class ProduitType extends AbstractType
                 'choice_label' => 'LIBPAYS',
                 'label' => 'Pays'
             ])
+            ->add('SEQSOUSPAYS', EntityType::class, [
+                'class' => Souspays::class,
+                'choice_label' => 'LIBSOUSPAYS',
+                'label' => 'Sous pays'
+            ])
+
         ;
     }
 
@@ -41,6 +49,7 @@ class ProduitType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Produit::class,
+            'csrf_protection' => true,
         ]);
     }
 }
